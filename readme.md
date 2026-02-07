@@ -1,28 +1,50 @@
-# 📋 MSU-IIT ROTC Database Automation Tools
+<div align="center">
 
-This project contains Python scripts designed to automate the verification, cleaning, and synchronization of the **AER Master List** and **Sectioning Lists** for the MSU-IIT ROTC Unit.
+# ⚔️ MSU-IIT ROTC Database Automation
 
-## 🛠️ Prerequisites
+### Automated Enrollment Verification & Data Sanitization System
+**MSU-IIT ROTC Unit (2nd Semester, A.Y. 2025-2026)**
 
-Before running the scripts, ensure you have Python installed and the required libraries:
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Open%20Source-orange?style=for-the-badge)
 
-```bash
-pip install pandas openpyxl
-📂 Folder StructureEnsure your project folder is organized exactly like this for the scripts to detect files correctly:Plaintext/ROTC_Project
-    │
-    ├── MSU-IIT AER 2S25-26 DATA.xlsx    <-- The Master List
-    ├── match_and_highlight.py           <-- Script 1 (The Matcher)
-    ├── reset_and_clean.py               <-- Script 2 (The Cleaner)
-    │
-    └── /Sectioning Lists                <-- FOLDER containing all Section files
-            ├── A COY.xlsx
-            ├── B COY.xlsx
-            ├── C COY.xlsx
-            └── ... (other section files)
-🚀 Tool 1: The Matcher & HighlighterFilename: match_and_highlight.pyThis script verifies student enrollment by comparing every Section List against the Master AER List.What it does:Scans the AER Master List to memorize all officially enrolled students.Checks every Section File in the Sectioning Lists folder.If a student in a section list is NOT found in the Master List, their row is highlighted RED in the section file.Updates the AER Master List:If a student in the Master List IS found in any section file, their name is highlighted BLUE in the Master List.How to Run:Open your terminal in the project folder and run:Bashpython match_and_highlight.py
-Output: Modified Section files (Red highlights applied) and a new master file named MSU-IIT AER_Highlighted.xlsx.🧹 Tool 2: The Cleaner & ResetterFilename: reset_and_clean.pyThis script resets the "Sectioning Lists" to a clean, default state. Use this if you need to start over or remove all highlights and temporary data.What it does:Clears Content: Deletes all text/data in Columns J through O (System/Status columns).Removes Colors: Resets all background fills (removes Red highlights).Resets Formatting: Sets all Row Heights and Column Widths back to Excel defaults.How to Run:Open your terminal in the project folder and run:Bashpython reset_and_clean.py
-Output: All Excel files in the Sectioning Lists folder are cleaned and reset to default formatting.⚙️ ConfigurationIf your file names or folder locations change, you must edit the CONFIGURATION section at the top of the python scripts:Python# Open the .py file and look for this section:
-# --- CONFIGURATION ---
+</div>
+
+---
+
+## 📖 Overview
+
+This suite of automation tools is designed to streamline the administrative workflow for the **MSU-IIT ROTC Unit**. It eliminates manual cross-checking between the **AER Master List** and individual **Sectioning Lists** (Coy/Platoon files).
+
+**Key Capabilities:**
+* ✅ **Instant Verification:** Cross-references thousands of students in seconds.
+* ✅ **Visual Auditing:** Automatically highlights missing or unverified students in **RED**.
+* ✅ **Master List Sync:** Updates the main database with **BLUE** indicators for confirmed enrollees.
+* ✅ **One-Click Cleanup:** Instantly resets and sanitizes all data files for fresh runs.
+
+---
+
+## 📂 Project Structure
+
+For the automation to work, your directory must be organized **exactly** as shown below:
+
+```text
+/ROTC_Project
+│
+├── 📜 MSU-IIT AER 2S25-26 DATA.xlsx      # 🔒 The Source of Truth (Master List)
+├── 🐍 match_and_highlight.py             # ⚙️ Script 1: The Verifier
+├── 🐍 reset_and_clean.py                 # 🧹 Script 2: The Cleaner
+│
+└── 📁 Sectioning Lists                   # 📂 Folder containing all Platoon/Coy files
+    ├── A COY.xlsx
+    ├── B COY.xlsx
+    ├── ...
+    └── Z COY.xlsx
+🛠️ Installation & SetupEnsure you have Python installed. Then, install the required dependencies:Bashpip install pandas openpyxl
+🚀 Usage Guide1️⃣ The Matcher & HighlighterRun this to verify enrollment.This script compares every student in the Sectioning Lists folder against the Master AER List.Logic:If a student in a Section List is NOT in the Master List → Row turns <span style="background-color: #ffcccc; color: black; padding: 2px 5px; border-radius: 3px;">🔴 RED</span>.If a student in the Master List IS found in a Section → Name turns <span style="background-color: #cceeff; color: black; padding: 2px 5px; border-radius: 3px;">🔵 BLUE</span>.Command:Bashpython match_and_highlight.py
+Output: Updates all section files and generates MSU-IIT AER_Highlighted.xlsx.2️⃣ The Cleaner & ResetterRun this to reset files to default.Use this tool when you need to start over. It wipes all processing data and formatting.Actions:🗑️ Sanitize: Clears data in System Columns (J through O).🎨 Reset Colors: Removes all Red/Blue background fills.ea Format: Resets Row Height (15) and Column Width (8.43).Command:Bashpython reset_and_clean.py
+Output: All files in Sectioning Lists are scrubbed clean.⚙️ ConfigurationIf file names or folder paths change, update the CONFIGURATION block at the top of the Python scripts:Python# --- CONFIGURATION ---
 AER_FILE_PATH = r"C:\Your\Path\To\MSU-IIT AER 2S25-26 DATA.xlsx"
 SECTION_FOLDER_PATH = r"C:\Your\Path\To\Sectioning Lists"
-📝 TroubleshootingError MessageSolutionModuleNotFoundError: No module named 'openpyxl'Run pip install pandas openpyxl in your terminal.Permission DeniedClose all Excel files before running the scripts. Python cannot edit open files.FileNotFoundErrorCheck that the paths in the script match the actual location of your files.
+❓ TroubleshootingIssueCauseSolutionModuleNotFoundErrorMissing libraries.Run pip install pandas openpyxlPermissionDeniedExcel file is open.Close all Excel files and try again.FileNotFoundErrorWrong paths.Check the SECTION_FOLDER_PATH in the script.<div align="center">Built for the MSU-IIT ROTC Corps of CadetsServe the people. Secure the land.</div>
